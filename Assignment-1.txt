@@ -1,0 +1,27 @@
+Assignment 1
+
+1. Create WebApi project
+2. Develop database model with code first approach having BankAccount and DebitCard entities in a one-to-many relationship (such as one bank account has many debit cards associated)
+3. Apply appropriate data annotations and fluent API on both class and properties level
+4. Write two methods for data retierval first method will fetch all the BankAccounts only with DTO object
+5. Second method will fetch DebitCards along with BankAccount information having join on multiple columns with anonymous object
+
+
+Dotnet EF Core 3.1.1 package required to run dotnet-ef commands through CLI
+dotnet tool install --global dotnet-ef --version 3.1.1
+
+Packages required in project
+dotnet add package Microsoft.EntityFrameworkCore --version 3.1.1
+otnet add package Microsoft.EntityFrameworkCore.Tools --version 3.1.1
+otnet add package Microsoft.EntityFrameworkCore.Design --version 3.1.1
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 3.1.0
+or
+dotnet add package Pomelo.EntityFrameworkCore.MySql --version 3.1.1
+
+
+
+
+the way we apply join between two different entities on two columns in LINQ:
+
+from x in Entity1
+join y in Entity2 on new { x.field1, x.field2 } equals new { y.field1, y.field2 }
