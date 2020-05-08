@@ -11,6 +11,6 @@ namespace Assignment_1.Service
     {
         IEnumerable<BankAccountDto> FetchAllAccounts();
 
-        dynamic FetchAllDebitCards();
+        OkObjectResult FetchAllDebitCards();
     }
 }

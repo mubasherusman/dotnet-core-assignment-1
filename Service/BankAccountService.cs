@@ -27,7 +27,7 @@ namespace Assignment_1.Service
             return dataContext.BankAccounts.Select(x => BankAccountMapper.ToBankAccountDTOMap(x)).ToList();
         }
 
-        public dynamic FetchAllDebitCards() {
+        public OkObjectResult FetchAllDebitCards() {
             logger.LogInformation("Inside FetchAllDebitCards Method for Debit cards");
 
             var debitCards = dataContext.DebitCards.
@@ -35,12 +35,12 @@ namespace Assignment_1.Service
                 debitCard => debitCard.BankAccount.Id,
                 bankAccount => bankAccount.Id,
                 (debitCard, bankAccount) => new {
-                    CardName = debitCard.CardName,
+                    debitCard.CardName,
                     CardNumber = debitCard.Id,
                     BankAccount = BankAccountMapper.ToBankAccountDTOMap(bankAccount)
                 })
                 .ToList();
-            return debitCards;
+            return new OkObjectResult(debitCards);
         }
     }
 }
