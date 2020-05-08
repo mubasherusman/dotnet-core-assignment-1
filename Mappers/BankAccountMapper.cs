@@ -11,6 +11,11 @@ namespace Assignment_1.Mappers
     {
         public static BankAccountDto ToBankAccountDTOMap(BankAccount ba)
         {
+            if (ba == null)
+            {
+                return null;
+            }
+
             return new BankAccountDto()
             {
                 BankAccountInternalId = ba.Id,

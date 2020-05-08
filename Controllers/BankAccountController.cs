@@ -7,30 +7,34 @@ using Assignment_1.Data;
 using Assignment_1.Dto;
 using Assignment_1.Mappers;
 using Assignment_1.Models;
+using Assignment_1.Service;
+using Assignment_1.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace Assignment_1.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class BankAccountController : BaseController
+    [Route(Constants.API_PREFIX + "bank-account")]
+    public class BankAccountController : ControllerBase
     {
+        private readonly IBankAccountService bankAccountService;
 
-        private readonly ILogger<BankAccountController> logger;
-        private readonly DataContext dataContext;
-
-        public BankAccountController(ILogger<BankAccountController> logger, DataContext dataContext)
+        public BankAccountController(IBankAccountService bankAccountService)
         {
-            this.logger = logger;
-            this.dataContext = dataContext;
+            this.bankAccountService = bankAccountService;
         }
 
         [HttpGet]
-        public ICollection<BankAccountDto> Get()
+        public IEnumerable<BankAccountDto> Get()
         {
-            logger.LogInformation("Inside Get Method for Account");
-            return dataContext.BankAccounts.Select(x=>BankAccountMapper.ToBankAccountDTOMap(x)).ToList();
+            return bankAccountService.FetchAllAccounts();
+        }
+
+        [HttpGet("debit-card")]
+        public IEnumerable<DebitCardDto> GetDebitCards()
+        {
+            return bankAccountService.FetchAllDebitCards();
         }
     }
 }

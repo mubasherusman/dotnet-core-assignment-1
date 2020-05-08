@@ -10,7 +10,7 @@ namespace Assignment_1.Mappers
     public class DebitCardMapper
     {
 
-        public static DebitCardDto ToAddressDTOMap(DebitCard d)
+        public static DebitCardDto ToDebitCardDTOMap(DebitCard d)
         {
             return new DebitCardDto()
             {
