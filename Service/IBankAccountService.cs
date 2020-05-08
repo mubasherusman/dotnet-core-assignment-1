@@ -1,4 +1,5 @@
 ﻿using Assignment_1.Dto;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace Assignment_1.Service
     {
         IEnumerable<BankAccountDto> FetchAllAccounts();
 
-        IEnumerable<DebitCardDto> FetchAllDebitCards();
+        dynamic FetchAllDebitCards();
     }
 }

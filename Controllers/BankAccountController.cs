@@ -32,7 +32,7 @@ namespace Assignment_1.Controllers
         }
 
         [HttpGet("debit-card")]
-        public IEnumerable<DebitCardDto> GetDebitCards()
+        public dynamic GetDebitCards()
         {
             return bankAccountService.FetchAllDebitCards();
         }
