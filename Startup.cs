@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Assignment_1.Data;
+using Assignment_1.middleware;
 using Assignment_1.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -47,6 +48,8 @@ namespace Assignment_1
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseHeaderMiddleware();
 
             app.UseEndpoints(endpoints =>
             {
