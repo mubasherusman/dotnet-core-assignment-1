@@ -1,11 +1,11 @@
-﻿using Assignment_1.Dto;
-using Assignment_1.Models;
+﻿using DotNetAssignment.Dto;
+using DotNetAssignment.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Assignment_1.Mappers
+namespace DotNetAssignment.Mappers
 {
     public class BankAccountMapper
     {

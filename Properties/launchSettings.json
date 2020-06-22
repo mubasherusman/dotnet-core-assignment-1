@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Assignment_1": {
+    "DotNetAssignment": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/bank-account",

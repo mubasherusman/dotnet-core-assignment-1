@@ -1,11 +1,11 @@
-﻿using Assignment_1.Models;
+﻿using DotNetAssignment.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Assignment_1.Data
+namespace DotNetAssignment.Data
 {
     public class DataContext : DbContext
     {

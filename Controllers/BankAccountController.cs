@@ -3,16 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Assignment_1.Data;
-using Assignment_1.Dto;
-using Assignment_1.Mappers;
-using Assignment_1.Models;
-using Assignment_1.Service;
-using Assignment_1.Utils;
+using DotNetAssignment.Data;
+using DotNetAssignment.Dto;
+using DotNetAssignment.Mappers;
+using DotNetAssignment.Models;
+using DotNetAssignment.Service;
+using DotNetAssignment.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Assignment_1.Controllers
+namespace DotNetAssignment.Controllers
 {
     [ApiController]
     [Route(Constants.API_PREFIX + "bank-account")]
@@ -32,9 +32,9 @@ namespace Assignment_1.Controllers
         }
 
         [HttpGet("debit-card")]
-        public OkObjectResult GetDebitCards()
+        public IActionResult GetDebitCards()
         {
-            return bankAccountService.FetchAllDebitCards();
+            return Ok(bankAccountService.FetchAllDebitCards());
         }
     }
 }

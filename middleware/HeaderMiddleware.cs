@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Formatters;
 
-namespace Assignment_1.middleware
+namespace DotNetAssignment.middleware
 {
     // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
     public class HeaderMiddleware
@@ -39,7 +39,7 @@ namespace Assignment_1.middleware
 
                 //await context.Response.WriteAsync(json);
 
-                throw new HeaderNotFoundException(statusCode, json);
+                //throw new HeaderNotFoundException(statusCode, json);
             }
 
             await _next(context);

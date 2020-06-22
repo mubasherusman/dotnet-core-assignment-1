@@ -1,6 +1,6 @@
-﻿using Assignment_1.Data;
-using Assignment_1.Dto;
-using Assignment_1.Mappers;
+﻿using DotNetAssignment.Data;
+using DotNetAssignment.Dto;
+using DotNetAssignment.Mappers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Logging;
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Assignment_1.Service
+namespace DotNetAssignment.Service
 {
     public class BankAccountService : IBankAccountService
     {
@@ -27,10 +27,10 @@ namespace Assignment_1.Service
             return dataContext.BankAccounts.Select(x => BankAccountMapper.ToBankAccountDTOMap(x)).ToList();
         }
 
-        public OkObjectResult FetchAllDebitCards() {
+        public dynamic FetchAllDebitCards() {
             logger.LogInformation("Inside FetchAllDebitCards Method for Debit cards");
 
-            var debitCards = dataContext.DebitCards.
+            var debitCard = dataContext.DebitCards.
                 Join(dataContext.BankAccounts,
                 debitCard => debitCard.BankAccount.Id,
                 bankAccount => bankAccount.Id,
@@ -40,7 +40,7 @@ namespace Assignment_1.Service
                     BankAccount = BankAccountMapper.ToBankAccountDTOMap(bankAccount)
                 })
                 .ToList();
-            return new OkObjectResult(debitCards);
+            return debitCard;
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Routing;
 using System;
 
-namespace Assignment_1.Utils
+namespace DotNetAssignment.Utils
 {
     public class ContextRootPathAttribute : Attribute, IRouteTemplateProvider
     {

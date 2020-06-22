@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Assignment_1.Data;
-using Assignment_1.middleware;
-using Assignment_1.Service;
+using DotNetAssignment.CustomFormater.Yaml;
+using DotNetAssignment.Data;
+using DotNetAssignment.middleware;
+using DotNetAssignment.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -16,7 +17,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Assignment_1
+namespace DotNetAssignment
 {
     public class Startup
     {
@@ -33,6 +34,12 @@ namespace Assignment_1
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
             services.TryAddScoped<IBankAccountService, BankAccountService>();
+            services.AddMvc(options =>
+            {
+                options.InputFormatters.Insert(0, new YamlInputFormatter());
+                options.OutputFormatters.Insert(0, new YamlOutputFormatter());
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Latest);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,9 +48,10 @@ namespace Assignment_1
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            } else
+            {
+                app.UseHttpsRedirection();
             }
-
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 

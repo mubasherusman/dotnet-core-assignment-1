@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Assignment_1.Models
+namespace DotNetAssignment.Models
 {
     public class BankAccount
     {

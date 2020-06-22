@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Assignment_1.Migrations
+namespace DotNetAssignment.Migrations
 {
     public partial class initWithConstraint : Migration
     {
