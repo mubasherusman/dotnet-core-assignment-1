@@ -39,7 +39,7 @@ namespace DotNetAssignment.middleware
 
                 //await context.Response.WriteAsync(json);
 
-                //throw new HeaderNotFoundException(statusCode, json);
+                throw new HeaderNotFoundException(statusCode, json);
             }
 
             await _next(context);

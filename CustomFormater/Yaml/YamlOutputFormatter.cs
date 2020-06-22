@@ -34,6 +34,9 @@ namespace DotNetAssignment.CustomFormater.Yaml
 
         public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
         {
+            IServiceProvider serviceProvider = context.HttpContext.RequestServices;
+            var logger = serviceProvider.GetService(typeof(ILogger<YamlOutputFormatter>)) as ILogger;
+
             var response = context.HttpContext.Response;
 
             var serializer = new SerializerBuilder().Build();
@@ -41,12 +44,16 @@ namespace DotNetAssignment.CustomFormater.Yaml
             if (context.Object is IEnumerable<BankAccountDto>)
             {
                 IEnumerable<BankAccountDto> bankAccounts = context.Object as IEnumerable<BankAccountDto>;
-                await response.WriteAsync(serializer.Serialize(bankAccounts));
+                var yml = serializer.Serialize(bankAccounts);
+                logger.LogInformation("Writting YAML = {yml}", yml);
+                await response.WriteAsync(yml);
             }
             else
             {
                 BankAccountDto bankAccount = context.Object as BankAccountDto;
-                await response.WriteAsync(serializer.Serialize(bankAccount));
+                var yml = serializer.Serialize(bankAccount);
+                logger.LogInformation("Writting YAML = {yml}", yml);
+                await response.WriteAsync(yml);
             }
             
         }
