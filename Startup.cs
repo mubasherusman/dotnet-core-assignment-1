@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DotNetAssignment.CustomFormater.Yaml;
 using DotNetAssignment.Data;
+using DotNetAssignment.Data.Repository;
 using DotNetAssignment.middleware;
 using DotNetAssignment.Service;
 using Microsoft.AspNetCore.Builder;
@@ -32,8 +33,14 @@ namespace DotNetAssignment
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            
             services.AddControllers();
+
             services.TryAddScoped<IBankAccountService, BankAccountService>();
+            services.TryAddScoped<IDebitCardService, DebitCardService>();
+            services.TryAddScoped<BankAccountRepository>();
+            services.TryAddScoped<DebitCardRepository>();
+
             services.AddMvc(options =>
             {
                 options.InputFormatters.Insert(0, new YamlInputFormatter());
@@ -57,7 +64,7 @@ namespace DotNetAssignment
 
             app.UseAuthorization();
 
-            app.UseHeaderMiddleware();
+            //app.UseHeaderMiddleware();
 
             app.UseEndpoints(endpoints =>
             {

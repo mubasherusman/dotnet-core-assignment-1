@@ -19,5 +19,15 @@ namespace DotNetAssignment.Mappers
                 BankAccount = BankAccountMapper.ToBankAccountDTOMap(d.BankAccount)
             };
         }
+
+        public static DebitCard ToDebitCardMap(DebitCardDto d)
+        {
+            return new DebitCard()
+            {
+                Id = d.CardNumber,
+                CardName = d.CardName,
+                BankAccount = BankAccountMapper.ToBankAccountMap(d.BankAccount)
+            };
+        }
     }
 }

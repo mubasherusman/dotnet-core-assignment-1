@@ -1,6 +1,8 @@
 ﻿using DotNetAssignment.Data;
+using DotNetAssignment.Data.Repository;
 using DotNetAssignment.Dto;
 using DotNetAssignment.Mappers;
+using DotNetAssignment.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Logging;
@@ -14,33 +16,22 @@ namespace DotNetAssignment.Service
     public class BankAccountService : IBankAccountService
     {
         private readonly ILogger<BankAccountService> logger;
-        private readonly DataContext dataContext;
+        private readonly BankAccountRepository repository;
 
         public BankAccountService(ILogger<BankAccountService> logger,
-                                    DataContext context) {
+                                    BankAccountRepository repository) {
             this.logger = logger;
-            dataContext = context;
+            this.repository = repository;
         }
 
-        public IEnumerable<BankAccountDto> FetchAllAccounts() {
+        public async IAsyncEnumerable<BankAccountDto> FetchAllAccounts() {
             logger.LogInformation("Inside FetchAllAccounts Method for Account");
-            return dataContext.BankAccounts.Select(x => BankAccountMapper.ToBankAccountDTOMap(x)).ToList();
-        }
-
-        public dynamic FetchAllDebitCards() {
-            logger.LogInformation("Inside FetchAllDebitCards Method for Debit cards");
-
-            var debitCard = dataContext.DebitCards.
-                Join(dataContext.BankAccounts,
-                debitCard => debitCard.BankAccount.Id,
-                bankAccount => bankAccount.Id,
-                (debitCard, bankAccount) => new {
-                    debitCard.CardName,
-                    CardNumber = debitCard.Id,
-                    BankAccount = BankAccountMapper.ToBankAccountDTOMap(bankAccount)
-                })
-                .ToList();
-            return debitCard;
+            List<BankAccount> accounts = await repository.FetchAll();
+            foreach(BankAccount a in accounts)
+            {
+                yield return BankAccountMapper.ToBankAccountDTOMap(a);
+            }
+            
         }
     }
 }

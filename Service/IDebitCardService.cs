@@ -1,5 +1,4 @@
 ﻿using DotNetAssignment.Dto;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DotNetAssignment.Service
 {
-    public interface IBankAccountService
+    public interface IDebitCardService
     {
-        IAsyncEnumerable<BankAccountDto> FetchAllAccounts();
+        dynamic FetchAllDebitCards();
 
-        
+        void createDebitCard(DebitCardDto dto);
     }
 }

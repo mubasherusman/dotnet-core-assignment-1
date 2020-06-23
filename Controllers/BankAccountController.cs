@@ -26,15 +26,9 @@ namespace DotNetAssignment.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<BankAccountDto> Get()
+        public IAsyncEnumerable<BankAccountDto> Get()
         {
             return bankAccountService.FetchAllAccounts();
-        }
-
-        [HttpGet("debit-card")]
-        public IActionResult GetDebitCards()
-        {
-            return Ok(bankAccountService.FetchAllDebitCards());
         }
     }
 }
